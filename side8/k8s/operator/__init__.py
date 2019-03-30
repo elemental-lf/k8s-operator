@@ -1,5 +1,4 @@
 import kubernetes
-from .patched_custom_objects_api import CustomObjectsApi as PatchedCustomObjectsApi
 from .utils import parse
 import sys
 import subprocess
@@ -102,7 +101,7 @@ async def events_consumer(custom_objects_api_instance, fqdn, version, resource, 
         if event_type in ["ADDED", "MODIFIED"]:
             if uid not in resource_queues:
                 logger.debug("{} does not have a pre-existing consumer, spawning one".format(logger_prefix))
-                api_update = functools.partial(custom_objects_api_instance.update_namespaced_custom_object,
+                api_update = functools.partial(custom_objects_api_instance.patch_namespaced_custom_object,
                                                fqdn, version, namespace, resource, name)
                 api_delete = functools.partial(custom_objects_api_instance.delete_namespaced_custom_object,
                                                fqdn, version, namespace, resource, name, body=kubernetes.client.V1DeleteOptions())
@@ -173,7 +172,7 @@ def main():
             logger.debug("No Kubernetes configuration found")
             sys.exit(1)
 
-    custom_objects_api_instance = PatchedCustomObjectsApi()
+    custom_objects_api_instance = kubernetes.client.CustomObjectsApi()
 
     fqdn = args.fqdn
     version = args.version
