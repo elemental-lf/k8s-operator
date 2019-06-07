@@ -1,0 +1,22 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: examples.example.com
+spec:
+  group: example.com
+  version: v1
+  scope: Namespaced
+  names:
+    kind: Example
+    singular: example
+    plural: examples
+    shortNames:
+      - ex
+status:
+  acceptedNames:
+    kind: Example
+    plural: examples
+    singular: example
+  storedVersions:
+    - v1
+  conditions: []
