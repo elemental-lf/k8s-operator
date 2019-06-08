@@ -1,14 +1,14 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='pykubeoperator',
-    version='0.1',
-    description='Minimal Kubernetes Operator SDK for Python',
-    url='https://github.com/elemental-lf/pykubeoperator',
+    name='k8s-mini-operator',
+    version='0.1.0',
+    description='(Very) minimal Kubernetes Operator SDK for Python',
+    url='https://github.com/elemental-lf/k8s-mini-operator',
     author='Lars Fenneberg',
     author_email='lf@elemental.net',
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
-    install_requires=['kubernetes==9.0.0', 'ruamel.yaml>0.15,<0.16', 'aiojobs==0.2.2', 'async-timeout==3.0.1'],
+    install_requires=['kubernetes==10.0.0', 'ruamel.yaml>0.15,<0.16'],
     keywords='kubernetes operator',
     license='Apache',
     classifiers=[
